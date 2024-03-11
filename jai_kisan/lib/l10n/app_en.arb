@@ -1,0 +1,24 @@
+{
+    "@@locale": "en",
+  
+    "growGreen": "Grow Green",
+    "@growGreen": {
+      "description": "App title"
+    },
+  
+    "liveRunningBar": "Live Running Bar",
+    "@liveRunningBar": {
+      "description": "Description for the live running bar"
+    },
+  
+    "past7DaysData": "Past 7 days data:",
+    "@past7DaysData": {
+      "description": "Text for past 7 days data"
+    },
+  
+    "logout": "Logout",
+    "@logout": {
+      "description": "Text for logout button"
+    }
+  }
+  

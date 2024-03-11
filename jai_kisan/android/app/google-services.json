@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "914578047208",
+    "project_id": "growgreen-2707b",
+    "storage_bucket": "growgreen-2707b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914578047208:android:71e09628baa084b7cb495d",
+        "android_client_info": {
+          "package_name": "com.example.vishnu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9fv_X4h0BA_Td9LHV3fvBctCU3TA83uM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
