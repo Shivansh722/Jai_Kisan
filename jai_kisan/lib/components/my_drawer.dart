@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:jai_kisan/components/image_picker.dart';
 import 'package:jai_kisan/pages/form_page.dart';
+import 'package:jai_kisan/pages/plant_image.dart';
+import 'package:jai_kisan/pages/weather_page.dart';
 import 'package:jai_kisan/pages/prediction_page.dart';
 import 'package:jai_kisan/authentication/auth_service.dart';
-import 'package:jai_kisan/pages/weather_page.dart';
 
 class MyDrawer extends StatelessWidget {
   void logout(BuildContext context) {

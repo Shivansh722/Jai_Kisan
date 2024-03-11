@@ -1,8 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:introduction_screen/introduction_screen.dart';
 import 'package:jai_kisan/authentication/auth_gate.dart';
+import 'package:introduction_screen/introduction_screen.dart';
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({super.key});
