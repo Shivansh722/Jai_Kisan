@@ -32,7 +32,7 @@ class _CardWidgetState extends State<CardWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
+            const Row(
               children: [
                 Icon(
                   Icons.live_tv_outlined,
