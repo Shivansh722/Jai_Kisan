@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jai_kisan/components/fetch_graph_data.dart';
 
 class LineChartWidget extends StatefulWidget {
-  const LineChartWidget({Key? key});
+  const LineChartWidget({super.key});
 
   @override
   State<LineChartWidget> createState() => _LineChartWidgetState();
@@ -11,8 +11,8 @@ class LineChartWidget extends StatefulWidget {
 
 class _LineChartWidgetState extends State<LineChartWidget> {
   List<Color> gradientColors = [
-    Colors.greenAccent,
-    Colors.yellowAccent,
+    const Color.fromARGB(255,45,149,150),
+    const Color.fromARGB(255,45,149,150),
   ];
 
   bool showAvg = false;
@@ -28,7 +28,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
     prices = await FetchData.fetchData();
     // Add any additional logic here if needed
     print(prices);
-    setState(() {}); // Trigger a rebuild to reflect the updated data
+    setState(() {});
   }
 
   @override
@@ -219,12 +219,20 @@ class _LineChartWidgetState extends State<LineChartWidget> {
       maxY: 6,
       lineBarsData: [
         LineChartBarData(
-          spots: List.generate(prices.length, (index) => FlSpot(index.toDouble(), prices[index])),
+          spots: const [
+            FlSpot(0, 3.101),
+            FlSpot(1, 3.133),
+            FlSpot(2, 4.241),
+            FlSpot(3, 3.181),
+            FlSpot(4, 5.311),
+            FlSpot(5, 3.147),
+            FlSpot(6, 2.011),
+          ],
           isCurved: true,
           gradient: LinearGradient(
             colors: gradientColors,
           ),
-          barWidth: 5,
+          barWidth: 2,
           isStrokeCapRound: true,
           dotData: const FlDotData(
             show: false,
