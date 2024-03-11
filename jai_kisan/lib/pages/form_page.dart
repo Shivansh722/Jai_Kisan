@@ -88,6 +88,19 @@ class _MarketSurveyScreenState extends State<MarketSurveyScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          // Handle the survey answers, considering null values
+          final cleanedAnswers =
+              surveyAnswers.map((key, value) => MapEntry(key, value ?? false));
+          print(cleanedAnswers);
+
+          // Navigate to LocalMood page with survey answers
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  LocalMoodPage(surveyAnswers: cleanedAnswers),
+            ),
+          );
         },
         child: const Icon(Icons.send),
       ),

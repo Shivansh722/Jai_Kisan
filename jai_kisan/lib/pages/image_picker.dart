@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerPage extends StatefulWidget {
-  ImagePickerPage({Key? key}) : super(key: key);
+  ImagePickerPage({super.key});
 
   XFile? _selectedImage;
   String? _resultClass;

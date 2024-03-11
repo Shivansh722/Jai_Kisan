@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jai_kisan/components/image_picker.dart';
 import 'package:jai_kisan/pages/form_page.dart';
-import 'package:jai_kisan/pages/settings_page.dart';
 import 'package:jai_kisan/pages/prediction_page.dart';
 import 'package:jai_kisan/authentication/auth_service.dart';
 import 'package:jai_kisan/pages/weather_page.dart';
@@ -71,6 +70,15 @@ class MyDrawer extends StatelessWidget {
             child: ListTile(
               title: const Text('LEAF DISEASE DETECTION'),
               leading: const Icon(Icons.energy_savings_leaf),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ImagePickerPage(),
+                  ),
+                );
+              },
             ),
           ),
           Padding(
@@ -78,6 +86,15 @@ class MyDrawer extends StatelessWidget {
             child: ListTile(
               title: const Text('WEATHER'),
               leading: const Icon(Icons.cloud),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const WeatherPage(),
+                  ),
+                );
+              },
             ),
           ),
           Padding(
