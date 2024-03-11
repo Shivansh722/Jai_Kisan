@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:jai_kisan/pages/form_page.dart';
+import 'package:jai_kisan/pages/soil_page.dart';
 import 'package:jai_kisan/pages/plant_image.dart';
 import 'package:jai_kisan/pages/weather_page.dart';
 import 'package:jai_kisan/pages/prediction_page.dart';
 import 'package:jai_kisan/authentication/auth_service.dart';
 
 class MyDrawer extends StatelessWidget {
+  const MyDrawer({Key? key}) : super(key: key);
+
   void logout(BuildContext context) {
     final _auth = AuthService();
     _auth.signOut();
@@ -14,30 +17,49 @@ class MyDrawer extends StatelessWidget {
     // Replace '/login' with your login screen route
   }
 
-  const MyDrawer({super.key});
-
   @override
   Widget build(BuildContext context) {
+    final authService = AuthService();
+    final currentDateTime = DateTime.now();
+
     return Drawer(
       backgroundColor: Theme.of(context).colorScheme.background,
       child: Column(
         children: [
-          const DrawerHeader(
-            child: Center(
-              child: Icon(
-                Icons.person,
-                size: 60,
+          SizedBox(
+            height: 250,
+            child: UserAccountsDrawerHeader(
+              accountEmail: Text(authService.auth.currentUser?.email ??
+                      '' // Set font color to black
+                  ),
+              currentAccountPicture: const CircleAvatar(
+                backgroundImage: AssetImage('lib/assets/farmer.jpg'),
               ),
-              // Your user profile content goes here
+              accountName: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${currentDateTime.day}/${currentDateTime.month}/${currentDateTime.year}\n${currentDateTime.hour}:${currentDateTime.minute}',
+                    style: const TextStyle(fontSize: 8, color: Colors.black),
+                  ),
+                  const Text(
+                    'Zorawar Sayyid Mohammed',
+                    style: TextStyle(
+                        color: Colors.black), // Set font color to black
+                  ),
+                ],
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              title: const Text('H O M E'),
-              leading: const Icon(Icons.home),
-              onTap: () => Navigator.pop(context),
-            ),
+
+          ListTile(
+            title: const Text('H O M E'),
+            leading: const Icon(Icons.home),
+            onTap: () => Navigator.pop(context),
           ),
           ListTile(
             title: const Text('P R E D I C T I O N'),
@@ -100,6 +122,22 @@ class MyDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
+              title: const Text('Soil Detection'),
+              leading: const Icon(Icons.terrain),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SoilPage(),
+                  ),
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
               title: const Text('Logout'),
               leading: const Icon(Icons.logout),
               onTap: () {
@@ -108,6 +146,7 @@ class MyDrawer extends StatelessWidget {
               },
             ),
           ),
+          // Add more ListTile items here as needed
         ],
       ),
     );

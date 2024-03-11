@@ -10,10 +10,10 @@ class ResultPage extends StatelessWidget {
 
   const ResultPage(
       {Key? key,
-      this.selectedCommodity,
-      this.selectedState,
+      required this.selectedCommodity,
+      required this.selectedState,
       this.selectedDistrict,
-      this.selectedMarket})
+      required this.selectedMarket})
       : super(key: key);
 
   @override

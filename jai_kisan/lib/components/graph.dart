@@ -11,12 +11,13 @@ class LineChartWidget extends StatefulWidget {
 
 class _LineChartWidgetState extends State<LineChartWidget> {
   List<Color> gradientColors = [
-    const Color.fromARGB(255,45,149,150),
-    const Color.fromARGB(255,45,149,150),
+    const Color.fromARGB(255, 45, 149, 150),
+    const Color.fromARGB(255, 45, 149, 150),
   ];
 
   bool showAvg = false;
   late List<double> prices;
+  bool isloading = true;
 
   @override
   void initState() {
@@ -28,27 +29,34 @@ class _LineChartWidgetState extends State<LineChartWidget> {
     prices = await FetchData.fetchData();
     // Add any additional logic here if needed
     print(prices);
-    setState(() {});
+    setState(() {
+      isloading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        AspectRatio(
-          aspectRatio: 1.70,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              right: 18,
-              left: 12,
-              top: 24,
-              bottom: 12,
-            ),
-            child: LineChart(
-              showAvg ? avgData() : mainData(),
+        if(isloading)
+          const Center(
+            child: CircularProgressIndicator(),
+          )
+        else
+          AspectRatio(
+            aspectRatio: 1.70,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                right: 18,
+                left: 12,
+                top: 24,
+                bottom: 12,
+              ),
+              child: LineChart(
+                showAvg ? avgData() : mainData(),
+              ),
             ),
           ),
-        ),
         SizedBox(
           width: 60,
           height: 34,

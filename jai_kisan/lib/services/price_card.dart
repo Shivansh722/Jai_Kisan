@@ -1,27 +1,39 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+// ignore: must_be_immutable
 class PriceCard extends StatefulWidget {
-  const PriceCard({Key? key}) : super(key: key);
+  // final String? selectedCommodity;
+  // final String? selectedState;
+  // final String? selectedMarket;
+  PriceCard({
+    // this.selectedCommodity,
+    // this.selectedState,
+    // this.selectedMarket,
+    super.key,
+  });
 
-  @override
-  _PriceCardState createState() => _PriceCardState();
-}
-
-class _PriceCardState extends State<PriceCard> {
   String minPrice = "loading..."; // Initial value
   String modelPrice = "loading...";
   String maxPrice = "loading...";
 
+  @override
+  State<PriceCard> createState() => _PriceCardState();
+}
+
+class _PriceCardState extends State<PriceCard> {
   Future<void> fetchPrice() async {
-    var apiUrl = Uri.parse('http://10.5.178.63:5000/current_price');
+    // var apiUrl = Uri.parse('http://10.5.178.63:5000/current_price');
+    var apiUrl = Uri.parse('http://10.5.163.158:5000/current_price');
 
     var body = json.encode({
       "commodity": "WHEAT",
       "state": "MADHYA PRADESH",
-      "market": "BERASIA"
+      "market": "ITARSI"
     });
+    print(body);
 
     try {
       final response = await http.post(
@@ -35,9 +47,9 @@ class _PriceCardState extends State<PriceCard> {
       if (response.statusCode == 200) {
         var data = json.decode(response.body)["prices"];
         setState(() {
-          minPrice = data['min_price'].toString();
-          modelPrice = data['modal_price'].toString();
-          maxPrice = data['max_price'].toString();
+          widget.minPrice = data['min_price'].toString();
+          widget.modelPrice = data['modal_price'].toString();
+          widget.maxPrice = data['max_price'].toString();
         });
       } else {
         print('Request failed with status: ${response.statusCode}');
@@ -78,9 +90,9 @@ class _PriceCardState extends State<PriceCard> {
                 2: IntrinsicColumnWidth(),
               },
               children: [
-                buildTableRow('Min. Price: ', minPrice),
-                buildTableRow('Model Price: ', modelPrice),
-                buildTableRow('Max. Price: ', maxPrice),
+                buildTableRow('Min. Price: ', widget.minPrice),
+                buildTableRow('Model Price: ', widget.modelPrice),
+                buildTableRow('Max. Price: ', widget.maxPrice),
               ],
             ),
           ],

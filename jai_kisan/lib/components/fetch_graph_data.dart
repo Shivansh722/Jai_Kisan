@@ -11,7 +11,7 @@ class FetchData extends StatefulWidget {
   State<FetchData> createState() => _FetchDataState();
 
   static Future<List<double>> fetchData() async {
-    const baseUrl = 'http://127.0.0.1:5000/predict';
+    const baseUrl = 'http://10.5.163.158:5000/predict';
     const selectedCommodity = 'Wheat';
     const selectedDistrict = 'Kurukshetra';
     const selectedMarket = 'Digapahandi';

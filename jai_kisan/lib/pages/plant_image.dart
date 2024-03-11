@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:jai_kisan/components/image_picker_helper.dart';
+import 'package:jai_kisan/pages/confidence_page.dart';
 
 class ImagePickerPage extends StatefulWidget {
   ImagePickerPage({Key? key}) : super(key: key);
@@ -41,17 +42,15 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
 
   Future<void> _submitImage() async {
     if (widget._selectedImage == null) {
+      // No image selected
       return;
     }
 
-    final apiUrl = Uri.parse("http://10.5.144.216:5000/predictleaf");
+    final apiUrl = Uri.parse("http://10.5.163.158:5000/predictleaf");
     final imageBytes = await widget._selectedImage!.readAsBytes();
     final request = http.MultipartRequest('POST', apiUrl)
       ..files.add(
-        await http.MultipartFile.fromPath(
-          "file",
-          widget._selectedImage!.path,
-        ),
+        await http.MultipartFile.fromPath("file", widget._selectedImage!.path),
       );
 
     final response = await request.send();
@@ -59,68 +58,74 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
     if (response.statusCode == 200) {
       final Map<String, dynamic> data =
           json.decode(await response.stream.bytesToString());
-      setState(() {
-        widget._resultClass = data['class'];
-        widget._resultConfidence = data['confidence'];
-      });
+
+      // Navigate to ResultPage with resultClass and resultConfidence as arguments
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ConfidencePage(
+            resultClass: data['class'],
+            resultConfidence: data['confidence'],
+          ),
+        ),
+      );
     } else {
       // Handle API error
       print("API Error: ${response.statusCode}");
     }
   }
 
-Widget _buildImagePreview() {
-  return Padding(
-    padding: const EdgeInsets.all(10.0),
-    child: Container(
-      height: MediaQuery.of(context).size.height * 0.7,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.greenAccent, width: 2),
-      ),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          widget._selectedImage != null
-              ? ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
-                  ),
-                  child: Image.file(
-                    File(widget._selectedImage!.path),
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: double.infinity,
-                  ),
-                )
-              : const SizedBox.shrink(),
-          if (widget._selectedImage == null)
-           const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.camera_alt,
-                  size: 50,
-                  color: Colors.grey,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Add Plant Picture here',
-                  style: TextStyle(
-                    fontSize: 20,
+  Widget _buildImagePreview() {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.7,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.greenAccent, width: 2),
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            widget._selectedImage != null
+                ? ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                    child: Image.file(
+                      File(widget._selectedImage!.path),
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                    ),
+                  )
+                : const SizedBox.shrink(),
+            if (widget._selectedImage == null)
+              const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.camera_alt,
+                    size: 50,
                     color: Colors.grey,
                   ),
-                ),
-              ],
-            ),
-        ],
+                  SizedBox(height: 10),
+                  Text(
+                    'Add Plant Picture here',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+          ],
+        ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +144,6 @@ Widget _buildImagePreview() {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                   
                     GestureDetector(
                       onTap: _pickImageFromGallery,
                       child: Image.asset(
@@ -148,7 +152,7 @@ Widget _buildImagePreview() {
                         height: 50,
                       ),
                     ),
-                     GestureDetector(
+                    GestureDetector(
                       onTap: _takePicture,
                       child: Image.asset(
                         'lib/assets/image.png', // Replace with your camera button asset
