@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jai_kisan/pages/lang_page.dart';
-import 'package:jai_kisan/pages/home_page_en.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:jai_kisan/pages/home_page_en.dart';
 import 'package:jai_kisan/authentication/login_or_reg.dart';
 
 class AuthGate extends StatelessWidget {

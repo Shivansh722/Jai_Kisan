@@ -1,5 +1,5 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:jai_kisan/components/fetch_graph_data.dart';
 
 class LineChartWidget extends StatefulWidget {
@@ -17,7 +17,6 @@ class _LineChartWidgetState extends State<LineChartWidget> {
 
   bool showAvg = false;
   late List<double> prices;
-  bool isLoading = true;
 
   @override
   void initState() {
@@ -29,34 +28,27 @@ class _LineChartWidgetState extends State<LineChartWidget> {
     prices = await FetchData.fetchData();
     // Add any additional logic here if needed
     print(prices);
-    setState(() {
-      isLoading = false;
-    });
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        if(isLoading)
-          const Center(
-            child: CircularProgressIndicator(),
-          )
-        else
-          AspectRatio(
-            aspectRatio: 1.70,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                right: 18,
-                left: 12,
-                top: 24,
-                bottom: 12,
-              ),
-              child: LineChart(
-                showAvg ? avgData() : mainData(),
-              ),
+        AspectRatio(
+          aspectRatio: 1.70,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              right: 18,
+              left: 12,
+              top: 24,
+              bottom: 12,
+            ),
+            child: LineChart(
+              showAvg ? avgData() : mainData(),
             ),
           ),
+        ),
         SizedBox(
           width: 60,
           height: 34,

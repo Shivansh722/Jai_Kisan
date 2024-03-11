@@ -1,6 +1,6 @@
+import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:jai_kisan/pages/onboarding_page.dart';
-import 'package:lottie/lottie.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});

@@ -18,7 +18,7 @@ class LiveRunningBar extends StatelessWidget {
         children: [
           Expanded(
             child: Marquee(
-              text: 'Live Price: $price',
+              text: 'Present Commodity: Wheat   Live Price: 2300 INR per quintal',
               style: const TextStyle(fontWeight: FontWeight.bold),
               scrollAxis: Axis.horizontal,
               crossAxisAlignment: CrossAxisAlignment.start,

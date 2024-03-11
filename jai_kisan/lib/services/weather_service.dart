@@ -1,9 +1,9 @@
 import 'dart:convert';
-
-import 'package:jai_kisan/models/weather_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:jai_kisan/models/weather_model.dart';
+
 
 class WeatherService {
   static const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
