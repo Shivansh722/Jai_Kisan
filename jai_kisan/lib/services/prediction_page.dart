@@ -20,7 +20,7 @@ class _PredictionPageState extends State<PredictionPage> {
   String price = "Predicted Price"; // Initial value
 
   Future<void> fetchPrice() async {
-    var apiUrl = Uri.parse('http://10.5.178.63:5000/predict');
+    var apiUrl = Uri.parse('http://10.5.163.158:5000/predict');
     // var apiUrl = Uri.parse('http://127.0.0.1:5000/predict');
 
     var body = json.encode({

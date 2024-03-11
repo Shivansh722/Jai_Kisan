@@ -17,7 +17,7 @@ class _FetchDataState extends State<FetchData> {
   }
 
   Future<void> fetchData() async {
-    const baseUrl = 'http://10.5.144.216:5000/predict';
+    const baseUrl = 'http://10.5.163.158:5000/predict';
     const selectedCommodity = 'Wheat';
     const selectedDistrict = 'Kurukshetra';
     const selectedMarket = 'Digapahandi';
