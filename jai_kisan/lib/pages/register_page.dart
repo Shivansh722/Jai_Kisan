@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jai_kisan/components/arc_draw.dart';
 import 'package:jai_kisan/components/my_button.dart';
 import 'package:jai_kisan/components/textfield.dart';
 import 'package:jai_kisan/authentication/auth_service.dart';
@@ -40,70 +41,87 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double arcDiameter = screenWidth * 1.2;
+
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.secondary,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            'lib/assets/JK_logo.png',
-            width: 300,
-            height: 250,
-          ),
-          Text(
-            "Let's create an account for you!",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.background,
-            ),
-          ),
-          MyTextField(
-            hintText: 'Email',
-            obscureText: false,
-            controller: _emailController,
-          ),
-          const SizedBox(height: 10),
-          MyTextField(
-            hintText: 'Password',
-            obscureText: true,
-            controller: _pwController,
-          ),
-          const SizedBox(height: 10),
-          MyTextField(
-            hintText: 'Confirm Password',
-            obscureText: true,
-            controller: _confirmPwController,
-          ),
-          SizedBox(height: 10),
-          MyButton(
-            text: "Register now!",
-            onTap: () => register(context),
-          ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Already have an account?",
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+      backgroundColor: Theme.of(context).colorScheme.background,
+      body: SingleChildScrollView(
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Positioned(
+              top: -arcDiameter / 1.5,
+              child: MyArc(
+                diameter: arcDiameter,
+                color: Colors.green,
               ),
-              GestureDetector(
-                onTap: onTap,
-                child: Text(
-                  " Login now!",
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'lib/assets/JK_logo.png',
+                  width: 300,
+                  height: 250,
+                ),
+                Text(
+                  "Let's create an account for you!",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.inversePrimary,
+                    color: Theme.of(context).colorScheme.background,
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+                MyTextField(
+                  hintText: 'Email',
+                  obscureText: false,
+                  controller: _emailController,
+                ),
+                const SizedBox(height: 10),
+                MyTextField(
+                  hintText: 'Password',
+                  obscureText: true,
+                  controller: _pwController,
+                ),
+                const SizedBox(height: 10),
+                MyTextField(
+                  hintText: 'Confirm Password',
+                  obscureText: true,
+                  controller: _confirmPwController,
+                ),
+                SizedBox(height: 10),
+                MyButton(
+                  text: "Register now!",
+                  onTap: () => register(context),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Already have an account?",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: onTap,
+                      child: Text(
+                        " Login now!",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

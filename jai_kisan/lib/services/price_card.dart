@@ -1,7 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
 
 // ignore: must_be_immutable
 class PriceCard extends StatefulWidget {
@@ -67,13 +67,20 @@ class _PriceCardState extends State<PriceCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(16.0),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+    return Column(
+      children: [
+        Card(
+          margin: const EdgeInsets.all(16.0),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+               const Icon(
+              Icons.attach_money, // You can use any icon you prefer
+              size: 24.0,
+            ),
+            const SizedBox(width: 8.0),
             const Text(
               'Price Details',
               style: TextStyle(
@@ -81,48 +88,74 @@ class _PriceCardState extends State<PriceCard> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const Divider(height: 20.0, color: Colors.black),
-            Table(
-              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-              columnWidths: const {
-                0: IntrinsicColumnWidth(),
-                1: IntrinsicColumnWidth(),
-                2: IntrinsicColumnWidth(),
-              },
-              children: [
-                buildTableRow('Min. Price: ', widget.minPrice),
-                buildTableRow('Model Price: ', widget.modelPrice),
-                buildTableRow('Max. Price: ', widget.maxPrice),
+                const Divider(height: 20.0, color: Colors.black),
+                Table(
+  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+  columnWidths: const {
+    0: IntrinsicColumnWidth(),
+    1: IntrinsicColumnWidth(),
+    2: IntrinsicColumnWidth(),
+  },
+  children: [
+    buildTableRow('Min. Price: ', '₹ ${widget.minPrice} '),
+    buildTableRow('Model Price: ', '₹ ${widget.modelPrice} '),
+    buildTableRow('Max. Price: ', '₹ ${widget.maxPrice} '),
+  ],
+)
               ],
+              
             ),
-          ],
+          ),
+
+        ),
+        SizedBox(height: 50.0),
+               ColoredBox(
+  color: const Color.fromARGB(255, 136, 224, 139),
+  child: ClipRRect(
+    borderRadius: BorderRadius.circular(50.0), // Adjust the radius as needed
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        'Model Price: ₹${widget.modelPrice}',
+        style: const TextStyle(
+          fontSize: 20.0,
+          fontWeight: FontWeight.bold,
         ),
       ),
+    ),
+  ),
+)
+
+      ],
     );
   }
 
   TableRow buildTableRow(String label, String value) {
-    return TableRow(
-      children: [
-        TableCell(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Text(
-              label,
-              style: const TextStyle(fontSize: 16.0),
-            ),
+  return TableRow(
+    children: [
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            label,
+            style: const TextStyle(fontSize: 16.0),
           ),
         ),
+      ),
         const SizedBox(width: 45.0),
         TableCell(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Container(
+            color: Colors.white, // White background color
+            padding: const EdgeInsets.all(8.0),
             child: Text(
               value,
               style: const TextStyle(fontSize: 16.0),
             ),
           ),
         ),
+      ),
       ],
     );
   }
