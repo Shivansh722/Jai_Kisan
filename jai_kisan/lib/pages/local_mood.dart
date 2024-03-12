@@ -54,6 +54,25 @@ class LocalMoodPage extends StatelessWidget {
                           ],
                         ),
                       ),
+                      const SizedBox(height: 20),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              Text("label: positive"),
+                              Text("Score: 92.9"),
+                            ],
+                          ),
+                          SizedBox(width: 10,),
+                          Column(
+                            children: [
+                              Text("label: negative"),
+                              Text("Score: 7.1"),
+                            ],
+                          ),
+                        ],  
+                      )
                     ],
                   ),
                 ),
