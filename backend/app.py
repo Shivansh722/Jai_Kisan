@@ -26,6 +26,13 @@ MODEL_SOIL = tf.keras.models.load_model("./soil_model/model")
 API_URL = "https://api-inference.huggingface.co/models/lxyuan/distilbert-base-multilingual-cased-sentiments-student"
 HEADERS = {"Authorization": "Bearer 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"}
 
+API_URL = "https://api-inference.huggingface.co/models/google/gemma-7b-it"
+headers = {"Authorization": "Bearer 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"}
+
+def query(payload):
+    response = requests.post(API_URL, headers=HEADERS, json=payload)
+    return response.json()
+
 def query(payload):
     response = requests.post(API_URL, headers=HEADERS, json=payload)
     return response.json()
@@ -36,6 +43,20 @@ SOIL_NAMES = ['Black Soil', 'Cinder Soil', 'Laterite Soil', 'Peat Soil', 'Yellow
 def read_file_as_image(data) -> np.ndarray:
     image = np.array(Image.open(BytesIO(data)))
     return image
+
+@app.route('/generate', methods=['POST'])
+def generate_text():
+    try:
+        data = request.json
+        prompt = data['prompt']
+        
+        output = query({
+            "inputs": prompt,
+        })
+        
+        return jsonify({"generated_text": output}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
     
 @app.route('/predict_sentiment', methods=['POST'])
 async def predict_sentiment():
@@ -131,7 +152,7 @@ def get():
         ]
         print(user_input)
         result = model.predict([[user_input[0],user_input[1],user_input[2],user_input[3],0,0,user_input[4]]])
-        return jsonify({'message': result.tolist()})
+        # return jsonify({'message': result.tolist()})
         return jsonify({
             "success": True,
             "price": result.tolist()[0]
@@ -183,7 +204,7 @@ def predict_soil():
         
         return jsonify({
             'class': predicted_class,
-            'confidence': confidence
+            # 'confidence': confidence
         })
     except Exception as e:
         return jsonify({'error': str(e)})
