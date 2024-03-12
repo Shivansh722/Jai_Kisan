@@ -19,13 +19,11 @@ class _CardWidgetState extends State<CardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Card(
       elevation: 10,
-      color: Color.fromARGB(255,154,208,194),
-       // Set the desired background color here
-      shadowColor: const Color.fromARGB(255,38,80,115),
-      surfaceTintColor: const Color.fromARGB(255,38,80,115),
+      color: Color.fromRGBO(189, 255, 183, 1),
+      shadowColor: Color.fromARGB(255, 38, 115, 56),
+      surfaceTintColor: Color.fromARGB(255, 23, 59, 27),
       margin: const EdgeInsets.all(16.0),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -55,84 +53,92 @@ class _CardWidgetState extends State<CardWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomDropdownButton(
-                    label: "Commodity",
-                    options: const [
-                      'Potato',
-                      'Wheat',
-                      'Onion',
-                      'Tomato',
-                      'Green Gram Dal (Moong Dal)',
-                      'Rice',
-                      'Soyabean',
-                      'Lemon',
-                    ],
-                    selectedValue: selectedCommodity,
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedCommodity = value;
-                      });
-                    }),
+                  label: "Commodity",
+                  icon: Icons.category, // Commodity leading icon
+                  options: const [
+                    'Potato',
+                    'Wheat',
+                    'Onion',
+                    'Tomato',
+                    'Green Gram Dal (Moong Dal)',
+                    'Rice',
+                    'Soyabean',
+                    'Lemon',
+                  ],
+                  selectedValue: selectedCommodity,
+                  onChanged: (String? value) {
+                    setState(() {
+                      selectedCommodity = value;
+                    });
+                  },
+                ),
                 CustomDropdownButton(
-                    label: "State",
-                    options: const [
-                      'Madhya Pradesh',
-                      'Punjab',
-                      'Uttar Pradesh',
-                      'Maharashtra',
-                      'Rajasthan',
-                      'Gujarat',
-                      'Andhra Pradesh',
-                      'Bihar',
-                      'Haryana',
-                      'Chhattisgarh',
-                      'Chandigarh'
-                    ],
-                    selectedValue: selectedState,
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedState = value;
-                      });
-                    }),
+                  label: "State",
+                  icon: Icons.location_on, // State leading icon
+                  options: const [
+                    'Madhya Pradesh',
+                    'Punjab',
+                    'Uttar Pradesh',
+                    'Maharashtra',
+                    'Rajasthan',
+                    'Gujarat',
+                    'Andhra Pradesh',
+                    'Bihar',
+                    'Haryana',
+                    'Chhattisgarh',
+                    'Chandigarh',
+                  ],
+                  selectedValue: selectedState,
+                  onChanged: (String? value) {
+                    setState(() {
+                      selectedState = value;
+                    });
+                  },
+                ),
                 CustomDropdownButton(
-                    label: "District",
-                    options: const [
-                      'Gautam Budh Nagar',
-                      'South District',
-                      'Ballia',
-                      'Imphal East',
-                      'Jhalawar',
-                      'Chitrakut',
-                      'Patiala',
-                      'Jalpaiguri',
-                      'Thoubal',
-                      'Fatehpur',
-                      'Hyderabad',
-                    ],
-                    selectedValue: selectedDistrict,
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedDistrict = value;
-                      });
-                    }),
+                  label: "District",
+                  icon: Icons.location_city, // District leading icon
+                  options: const [
+                    'Gautam Budh Nagar',
+                    'South District',
+                    'Ballia',
+                    'Imphal East',
+                    'Jhalawar',
+                    'Chitrakut',
+                    'Patiala',
+                    'Jalpaiguri',
+                    'Thoubal',
+                    'Fatehpur',
+                    'Hyderabad',
+                  ],
+                  selectedValue: selectedDistrict,
+                  onChanged: (String? value) {
+                    setState(() {
+                      selectedDistrict = value;
+                    });
+                  },
+                ),
                 CustomDropdownButton(
-                    label: "Market",
-                    options: const [
-                      'Kalikiri',
-                      'Rajapalayam',
-                      'Bishramganj',
-                      'Lakhanpuri',
-                      'Nilagiri',
-                      'Uniyara',
-                      'Kondotty',
-                      'Lasalgaon(Niphad)',
-                      'Adampur',
-                    ],
-                    selectedValue: selectedMarket,
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedMarket = value;
-                      });
-                    }),
+                  label: "Market",
+                  icon: Icons.shopping_basket, // Market leading icon
+                  options: const [
+                    'Kalikiri',
+                    'Rajapalayam',
+                    'Bishramganj',
+                    'Lakhanpuri',
+                    'Nilagiri',
+                    'Uniyara',
+                    'Kondotty',
+                    'Lasalgaon(Niphad)',
+                    'Adampur',
+                  ],
+                  selectedValue: selectedMarket,
+                  onChanged: (String? value) {
+                    setState(() {
+                      selectedMarket = value;
+                    });
+                  },
+                ),
               ],
             ),
             const SizedBox(height: 20.0),
@@ -142,14 +148,15 @@ class _CardWidgetState extends State<CardWidget> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ResultPage(
-                        selectedCommodity: selectedCommodity,
-                        selectedState: selectedState,
-                        selectedDistrict: selectedDistrict,
-                        selectedMarket: selectedMarket),
+                      selectedCommodity: selectedCommodity,
+                      selectedState: selectedState,
+                      selectedDistrict: selectedDistrict,
+                      selectedMarket: selectedMarket,
+                    ),
                   ),
                 );
               },
-              child: const Text('Get Results'),
+              child: const Text('Get Results', style: TextStyle(color: Colors.black)),
             ),
           ],
         ),

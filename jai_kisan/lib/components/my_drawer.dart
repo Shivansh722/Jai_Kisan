@@ -57,12 +57,12 @@ class MyDrawer extends StatelessWidget {
           ),
 
           ListTile(
-            title: const Text('H O M E'),
+            title: const Text('Home'),
             leading: const Icon(Icons.home),
             onTap: () => Navigator.pop(context),
           ),
           ListTile(
-            title: const Text('P R E D I C T I O N'),
+            title: const Text('Prediction'),
             leading: const Icon(Icons.batch_prediction),
             onTap: () {
               Navigator.pop(context);
@@ -75,7 +75,7 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('F E E D B A C K'),
+            title: const Text('Feedback'),
             leading: const Icon(Icons.analytics),
             onTap: () {
               Navigator.pop(context);
@@ -90,7 +90,7 @@ class MyDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
-              title: const Text('LEAF DISEASE DETECTION'),
+              title: const Text('Agronomy Advisory'),
               leading: const Icon(Icons.energy_savings_leaf),
               onTap: () {
                 Navigator.pop(context);
@@ -106,7 +106,7 @@ class MyDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
-              title: const Text('WEATHER'),
+              title: const Text('Weather'),
               leading: const Icon(Icons.cloud),
               onTap: () {
                 Navigator.pop(context);
@@ -129,7 +129,7 @@ class MyDrawer extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const SoilPage(),
+                    builder: (context) =>  SoilPage(),
                   ),
                 );
               },

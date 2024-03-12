@@ -5,6 +5,7 @@ class CustomDropdownButton extends StatefulWidget {
   final List<String> options;
   final String? selectedValue;
   final ValueChanged<String?> onChanged;
+  final IconData? icon;
 
   const CustomDropdownButton({
     super.key,
@@ -12,6 +13,7 @@ class CustomDropdownButton extends StatefulWidget {
     required this.options,
     required this.selectedValue,
     required this.onChanged,
+    this.icon,
   });
 
   @override
