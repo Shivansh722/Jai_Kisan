@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jai_kisan/pages/form_page.dart';
 import 'package:jai_kisan/pages/soil_page.dart';
 import 'package:jai_kisan/pages/plant_image.dart';
+import 'package:jai_kisan/pages/text_speech.dart';
 import 'package:jai_kisan/pages/weather_page.dart';
 import 'package:jai_kisan/pages/prediction_page.dart';
 import 'package:jai_kisan/authentication/auth_service.dart';
@@ -102,6 +103,20 @@ class MyDrawer extends StatelessWidget {
                 );
               },
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+                title: Text('Speech to Text'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SpeechToTextPage(),
+                    ),
+                  );
+                },
+              ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),

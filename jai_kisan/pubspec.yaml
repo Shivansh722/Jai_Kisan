@@ -28,6 +28,7 @@ dependencies:
   lottie:
   geolocator:
   geocoding:
+  speech_to_text:
   
   google_sign_in: ^6.2.1
   provider:
