@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jai_kisan/pages/form_page.dart';
+import 'package:jai_kisan/pages/news_page.dart';
 import 'package:jai_kisan/pages/soil_page.dart';
 import 'package:jai_kisan/pages/plant_image.dart';
 import 'package:jai_kisan/pages/weather_page.dart';
@@ -10,8 +11,8 @@ class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key}) : super(key: key);
 
   void logout(BuildContext context) {
-    final _auth = AuthService();
-    _auth.signOut();
+    final auth = AuthService();
+    auth.signOut();
     // After logging out, you may want to navigate to the login or home screen
     // Example:
     // Replace '/login' with your login screen route
@@ -83,6 +84,19 @@ class MyDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => const MarketSurveyScreen(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('NEWS'),
+            leading: const Icon(Icons.newspaper),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NewsPage(),
                 ),
               );
             },
