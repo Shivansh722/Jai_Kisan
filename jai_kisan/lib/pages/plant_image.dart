@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:jai_kisan/components/image_picker_helper.dart';
 import 'package:jai_kisan/pages/confidence_page.dart';
+import 'package:jai_kisan/components/image_picker_helper.dart';
 
 class ImagePickerPage extends StatefulWidget {
   ImagePickerPage({Key? key}) : super(key: key);
@@ -131,7 +131,12 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Image Picker Page'),
+        title: const Text('Plant Classification Page'),
+        toolbarHeight: kToolbarHeight + 24,
+        actions: [
+          // Replace 'your_logo_asset.png' with your actual logo asset
+          Image.asset('lib/assets/JK_logo.png'),
+        ],
       ),
       body: Column(
         children: [

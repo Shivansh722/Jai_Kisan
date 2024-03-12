@@ -10,6 +10,7 @@ class _SpeechToTextPageState extends State<SpeechToTextPage> {
   late stt.SpeechToText _speech;
   bool _isListening = false;
   String _text = 'Press the button and start speaking.';
+  TextEditingController _textInputController = TextEditingController();
 
   @override
   void initState() {
@@ -46,6 +47,18 @@ class _SpeechToTextPageState extends State<SpeechToTextPage> {
     });
   }
 
+  void _onSubmit() {
+    setState(() {
+      _text = _textInputController.text;
+    });
+  }
+
+  @override
+  void dispose() {
+    _textInputController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,6 +86,19 @@ class _SpeechToTextPageState extends State<SpeechToTextPage> {
             ElevatedButton(
               onPressed: _listen,
               child: Text(_isListening ? 'Stop Listening' : 'Start Listening'),
+            ),
+            SizedBox(height: 20),
+            TextField(
+              controller: _textInputController,
+              decoration: InputDecoration(
+                labelText: 'Enter Text',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: _onSubmit,
+              child: Text('Show Text'),
             ),
           ],
         ),

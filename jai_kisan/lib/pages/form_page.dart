@@ -24,8 +24,15 @@ class _MarketSurveyScreenState extends State<MarketSurveyScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Market Survey'),
+        toolbarHeight: kToolbarHeight + 24,
+        actions: [
+          // Replace 'your_logo_asset.png' with your actual logo asset
+          Image.asset('lib/assets/JK_logo.png'),
+        ],
       ),
+       backgroundColor: Color.fromARGB(255, 110, 162, 148),
       body: SingleChildScrollView(
+       
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -57,7 +64,7 @@ class _MarketSurveyScreenState extends State<MarketSurveyScreen> {
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: surveyAnswers[question] == true
-                                  ? const Color.fromARGB(255, 174, 212, 175)
+                                  ? Color.fromARGB(255, 36, 58, 15)
                                   : const Color.fromARGB(255, 255, 255, 255),
                             ),
                             child: const Text('Yes'),
@@ -71,7 +78,7 @@ class _MarketSurveyScreenState extends State<MarketSurveyScreen> {
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: surveyAnswers[question] == false
-                                  ? const Color.fromARGB(255, 2, 75, 4)
+                                  ? Color.fromARGB(255, 145, 10, 10)
                                   : const Color.fromARGB(255, 255, 255, 255),
                             ),
                             child: const Text('No'),

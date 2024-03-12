@@ -26,6 +26,11 @@ class NewsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('News Page'),
+        toolbarHeight: kToolbarHeight + 24,
+        actions: [
+          // Replace 'your_logo_asset.png' with your actual logo asset
+          Image.asset('lib/assets/JK_logo.png'),
+        ],
       ),
       body: ListView.builder(
         itemCount: newsList.length,

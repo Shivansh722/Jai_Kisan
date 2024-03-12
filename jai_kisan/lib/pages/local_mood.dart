@@ -18,6 +18,11 @@ class LocalMoodPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Local Mood'),
+        toolbarHeight: kToolbarHeight + 24,
+        actions: [
+          // Replace 'your_logo_asset.png' with your actual logo asset
+          Image.asset('lib/assets/JK_logo.png'),
+        ],
       ),
       body: Center(
         child: Padding(
@@ -25,6 +30,27 @@ class LocalMoodPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                           
+                           
+                            children: [
+                              Text("label: positive"
+                              ),
+                              Text("Score: 92.9"),
+                            ],
+                          ),
+                          SizedBox(width: 10,),
+                          Column(
+                            children: [
+                              Text("label: negative"),
+                              Text("Score: 7.1"),
+                            ],
+                          ),
+                        ],  
+                      ),
               Text(
                 message,
                 style: TextStyle(
@@ -54,25 +80,8 @@ class LocalMoodPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Column(
-                            children: [
-                              Text("label: positive"),
-                              Text("Score: 92.9"),
-                            ],
-                          ),
-                          SizedBox(width: 10,),
-                          Column(
-                            children: [
-                              Text("label: negative"),
-                              Text("Score: 7.1"),
-                            ],
-                          ),
-                        ],  
-                      )
+                      
+                      
                     ],
                   ),
                 ),

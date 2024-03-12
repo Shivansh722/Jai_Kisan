@@ -8,8 +8,8 @@ class SoilPage extends StatefulWidget {
   SoilPage({Key? key});
 
   XFile? _selectedSoilImage;
-  String? _resultSoilClass;
-  double? _resultSoilConfidence;
+   String? _resultSoilClass;
+   double? _resultSoilConfidence;
 
   @override
   State<SoilPage> createState() => _SoilPageState();
@@ -58,7 +58,7 @@ class _SoilPageState extends State<SoilPage> {
       return;
     }
 
-    final apiUrl = Uri.parse("http://your-soil-api-endpoint"); // Update with your soil prediction API endpoint
+    final apiUrl = Uri.parse("http://10.5.163.158:5000/predict_soil"); // Update with your soil prediction API endpoint
     final soilImageBytes = await widget._selectedSoilImage!.readAsBytes();
     final request = http.MultipartRequest('POST', apiUrl)
       ..files.add(
@@ -68,8 +68,10 @@ class _SoilPageState extends State<SoilPage> {
     final response = await request.send();
 
     if (response.statusCode == 200) {
+      print('hello1');
       final Map<String, dynamic> data =
           json.decode(await response.stream.bytesToString());
+          print(data);
       setState(() {
         widget._resultSoilClass = data['class'];
         widget._resultSoilConfidence = data['confidence'];
@@ -112,11 +114,17 @@ class _SoilPageState extends State<SoilPage> {
                 width: 200,
                 fit: BoxFit.cover,
               ),
-            if (widget._resultSoilClass != null && widget._resultSoilConfidence != null)
+            if (widget._resultSoilClass != null)
               Column(
                 children: [
-                  Text('Soil Class: ${widget._resultSoilClass}'),
-                  Text('Soil Confidence: ${widget._resultSoilConfidence}'),
+                  Text('Soil Class: ${widget._resultSoilClass}',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                  ),
+                  
                 ],
               ),
           ],

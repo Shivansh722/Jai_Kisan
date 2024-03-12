@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(onPressed: logout, icon: const Icon(Icons.logout)),
         ],
         centerTitle: true,
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         foregroundColor: Colors.white,
       ),
       drawer: const MyDrawer(),

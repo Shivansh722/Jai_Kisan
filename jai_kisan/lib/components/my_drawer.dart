@@ -26,102 +26,103 @@ class MyDrawer extends StatelessWidget {
 
     return Drawer(
       backgroundColor: Theme.of(context).colorScheme.background,
-      child: Column(
-        children: [
-          SizedBox(
-            height: 250,
-            child: UserAccountsDrawerHeader(
-              accountEmail: Text(authService.auth.currentUser?.email ??
-                      '' // Set font color to black
-                  ),
-              currentAccountPicture: const CircleAvatar(
-                backgroundImage: AssetImage('lib/assets/farmer.jpg'),
-              ),
-              accountName: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '${currentDateTime.day}/${currentDateTime.month}/${currentDateTime.year}\n${currentDateTime.hour}:${currentDateTime.minute}',
-                    style: const TextStyle(fontSize: 8, color: Colors.black),
-                  ),
-                  const Text(
-                    'Zorawar Sayyid Mohammed',
-                    style: TextStyle(
-                        color: Colors.black), // Set font color to black
-                  ),
-                ],
-              ),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 250,
+              child: UserAccountsDrawerHeader(
+                accountEmail: Text(authService.auth.currentUser?.email ??
+                    ''), // Set font color to black
+                currentAccountPicture: const CircleAvatar(
+                  backgroundImage: AssetImage('lib/assets/farmer.jpg'),
+                ),
+                accountName: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${currentDateTime.day}/${currentDateTime.month}/${currentDateTime.year}\n${currentDateTime.hour}:${currentDateTime.minute}',
+                      style: const TextStyle(fontSize: 8, color: Colors.black),
+                    ),
+                    const Text(
+                      'Zorawar Sayyid Mohammed',
+                      style: TextStyle(
+                          color: Colors.black), // Set font color to black
+                    ),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                ),
               ),
             ),
-          ),
 
-          ListTile(
-            title: const Text('Home'),
-            leading: const Icon(Icons.home),
-            onTap: () => Navigator.pop(context),
-          ),
-          ListTile(
-            title: const Text('Prediction'),
-            leading: const Icon(Icons.batch_prediction),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const PredictionPage(),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            title: const Text('Feedback'),
-            leading: const Icon(Icons.analytics),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const MarketSurveyScreen(),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            title: const Text('NEWS'),
-            leading: const Icon(Icons.newspaper),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NewsPage(),
-                ),
-              );
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              title: const Text('Agronomy Advisory'),
-              leading: const Icon(Icons.energy_savings_leaf),
+            ListTile(
+              title: const Text('Home'),
+              leading: const Icon(Icons.home),
+              onTap: () => Navigator.pop(context),
+            ),
+            ListTile(
+              title: const Text('Prediction'),
+              leading: const Icon(Icons.batch_prediction),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ImagePickerPage(),
+                    builder: (context) => const PredictionPage(),
                   ),
                 );
               },
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
+            ListTile(
+              title: const Text('Feedback'),
+              leading: const Icon(Icons.analytics),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MarketSurveyScreen(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('NEWS'),
+              leading: const Icon(Icons.newspaper),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NewsPage(),
+                  ),
+                );
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                title: const Text('Agronomy Advisory'),
+                leading: const Icon(Icons.energy_savings_leaf),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ImagePickerPage(),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
                 title: Text('Speech to Text'),
+                leading: const Icon(Icons.mic),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -131,52 +132,53 @@ class MyDrawer extends StatelessWidget {
                   );
                 },
               ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              title: const Text('Weather'),
-              leading: const Icon(Icons.cloud),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const WeatherPage(),
-                  ),
-                );
-              },
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              title: const Text('Soil Detection'),
-              leading: const Icon(Icons.terrain),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>  SoilPage(),
-                  ),
-                );
-              },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                title: const Text('Weather'),
+                leading: const Icon(Icons.cloud),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const WeatherPage(),
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              title: const Text('Logout'),
-              leading: const Icon(Icons.logout),
-              onTap: () {
-                Navigator.pop(context);
-                logout(context);
-              },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                title: const Text('Soil Detection'),
+                leading: const Icon(Icons.terrain),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SoilPage(),
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-          // Add more ListTile items here as needed
-        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                title: const Text('Logout'),
+                leading: const Icon(Icons.logout),
+                onTap: () {
+                  Navigator.pop(context);
+                  logout(context);
+                },
+              ),
+            ),
+            // Add more ListTile items here as needed
+          ],
+        ),
       ),
     );
   }

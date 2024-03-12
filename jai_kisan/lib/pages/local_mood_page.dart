@@ -31,9 +31,9 @@ class LocalMoodPage extends StatelessWidget {
               Text(
                 message,
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 30,
                   fontWeight: FontWeight.bold,
-                  color: (yesCount > noCount) ? Colors.green : Colors.red,
+                 
                 ),
                 textAlign: TextAlign.center,
               ),

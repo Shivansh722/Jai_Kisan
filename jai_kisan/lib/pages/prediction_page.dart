@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:jai_kisan/components/dropdown_menu.dart';
 
-
 class PredictionPage extends StatefulWidget {
   const PredictionPage({super.key});
 
@@ -12,7 +11,6 @@ class PredictionPage extends StatefulWidget {
 }
 
 class _PredictionPageState extends State<PredictionPage> {
-  // Initialize variables to hold selected values
   String? selectedCommodity;
   String? selectedState;
   String? selectedDistrict;
@@ -20,9 +18,7 @@ class _PredictionPageState extends State<PredictionPage> {
   String price = "Predicted Price"; // Initial value
 
   Future<void> fetchPrice() async {
-    //var apiUrl = Uri.parse('http://10.5.178.63:5000/predict');
     var apiUrl = Uri.parse('http://10.5.163.158:5000/predict');
-
     var body = json.encode({
       'commodity': selectedCommodity,
       'district': selectedDistrict,
@@ -51,6 +47,11 @@ class _PredictionPageState extends State<PredictionPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Prediction'),
+        toolbarHeight: kToolbarHeight + 24,
+        actions: [
+          // Replace 'your_logo_asset.png' with your actual logo asset
+          Image.asset('lib/assets/JK_logo.png'),
+        ],
       ),
       body: SizedBox(
         width: double.infinity,
@@ -67,92 +68,96 @@ class _PredictionPageState extends State<PredictionPage> {
                   Column(
                     children: [
                       CustomDropdownButton(
-                          label: "Commodity",
-                          options: const [
-                            'Potato',
-                            'Wheat',
-                            'Onion',
-                            'Tomato',
-                            'Green Gram Dal (Moong Dal)',
-                            'Rice',
-                            'Soyabean',
-                            'Lemon',
-                          ],
-                          selectedValue: selectedCommodity,
-                          onChanged: (String? value) {
-                            setState(() {
-                              selectedCommodity = value;
-                            });
-                          }),
+                        label: "Commodity",
+                        options: const [
+                          'Potato',
+                          'Wheat',
+                          'Onion',
+                          'Tomato',
+                          'Green Gram Dal (Moong Dal)',
+                          'Rice',
+                          'Soyabean',
+                          'Lemon',
+                        ],
+                        selectedValue: selectedCommodity,
+                        onChanged: (String? value) {
+                          setState(() {
+                            selectedCommodity = value;
+                          });
+                        },
+                      ),
                       CustomDropdownButton(
-                          label: "State",
-                          options: const [
-                            'Madhya Pradesh',
-                            'Punjab',
-                            'Uttar Pradesh',
-                            'Maharashtra',
-                            'Rajasthan',
-                            'Gujarat',
-                            'Andhra Pradesh',
-                            'Bihar',
-                            'Haryana',
-                            'Chhattisgarh',
-                            'Chandigarh'
-                          ],
-                          selectedValue: selectedState,
-                          onChanged: (String? value) {
-                            setState(() {
-                              selectedState = value;
-                            });
-                          }),
+                        label: "State",
+                        options: const [
+                          'Madhya Pradesh',
+                          'Punjab',
+                          'Uttar Pradesh',
+                          'Maharashtra',
+                          'Rajasthan',
+                          'Gujarat',
+                          'Andhra Pradesh',
+                          'Bihar',
+                          'Haryana',
+                          'Chhattisgarh',
+                          'Chandigarh',
+                        ],
+                        selectedValue: selectedState,
+                        onChanged: (String? value) {
+                          setState(() {
+                            selectedState = value;
+                          });
+                        },
+                      ),
                       CustomDropdownButton(
-                          label: "District",
-                          options: const [
-                            'Gautam Budh Nagar',
-                            'South District',
-                            'Ballia',
-                            'Imphal East',
-                            'Jhalawar',
-                            'Chitrakut',
-                            'Patiala',
-                            'Jalpaiguri',
-                            'Thoubal',
-                            'Fatehpur',
-                            'Hyderabad',
-                          ],
-                          selectedValue: selectedDistrict,
-                          onChanged: (String? value) {
-                            setState(() {
-                              selectedDistrict = value;
-                            });
-                          }),
+                        label: "District",
+                        options: const [
+                          'Gautam Budh Nagar',
+                          'South District',
+                          'Ballia',
+                          'Imphal East',
+                          'Jhalawar',
+                          'Chitrakut',
+                          'Patiala',
+                          'Jalpaiguri',
+                          'Thoubal',
+                          'Fatehpur',
+                          'Hyderabad',
+                        ],
+                        selectedValue: selectedDistrict,
+                        onChanged: (String? value) {
+                          setState(() {
+                            selectedDistrict = value;
+                          });
+                        },
+                      ),
                       CustomDropdownButton(
-                          label: "Market",
-                          options: const [
-                            'Kalikiri',
-                            'Rajapalayam',
-                            'Bishramganj',
-                            'Lakhanpuri',
-                            'Nilagiri',
-                            'Uniyara',
-                            'Kondotty',
-                            'Lasalgaon(Niphad)',
-                            'Adampur',
-                            'Sathur',
-                            'Umreth',
-                            'Ruperdeeha',
-                            'Vemulawada',
-                            'Dharapuram',
-                            'Gauripur',
-                            'Baruwasagar',
-                            'Karamadai'
-                          ],
-                          selectedValue: selectedMarket,
-                          onChanged: (String? value) {
-                            setState(() {
-                              selectedMarket = value;
-                            });
-                          }),
+                        label: "Market",
+                        options: const [
+                          'Kalikiri',
+                          'Rajapalayam',
+                          'Bishramganj',
+                          'Lakhanpuri',
+                          'Nilagiri',
+                          'Uniyara',
+                          'Kondotty',
+                          'Lasalgaon(Niphad)',
+                          'Adampur',
+                          'Sathur',
+                          'Umreth',
+                          'Ruperdeeha',
+                          'Vemulawada',
+                          'Dharapuram',
+                          'Gauripur',
+                          'Baruwasagar',
+                          'Karamadai',
+                        ],
+                        selectedValue: selectedMarket,
+                        onChanged: (String? value) {
+                          setState(() {
+                            selectedMarket = value;
+                          });
+                        },
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20.0),
@@ -160,6 +165,9 @@ class _PredictionPageState extends State<PredictionPage> {
                     onPressed: () {
                       fetchPrice();
                     },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.green, // Change button color
+                    ),
                     child: const Text('Submit'),
                   ),
                   const SizedBox(height: 20.0),
@@ -168,6 +176,14 @@ class _PredictionPageState extends State<PredictionPage> {
                     style: const TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 20.0),
+                  Text(
+                    'Grow Green gives you the surety no one does!',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.green,
                     ),
                   ),
                 ],
