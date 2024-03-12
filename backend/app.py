@@ -1,9 +1,11 @@
 import pickle
 from io import BytesIO
+import cv2
 
 import numpy as np
 import requests
 import tensorflow as tf
+import requests
 from commodity_mapping import commodity_map
 from district_mapping import district_mapping
 from flask import Flask, jsonify, request
@@ -19,13 +21,35 @@ with open('model3.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
     
 MODEL = tf.keras.models.load_model("./saved_models/2")
+MODEL_SOIL = tf.keras.models.load_model("./soil_model/model")
+
+API_URL = "https://api-inference.huggingface.co/models/lxyuan/distilbert-base-multilingual-cased-sentiments-student"
+HEADERS = {"Authorization": "Bearer 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"}
+
+def query(payload):
+    response = requests.post(API_URL, headers=HEADERS, json=payload)
+    return response.json()
 
 CLASS_NAMES = ["Early Blight", "Late Blight", "Healthy"]
+SOIL_NAMES = ['Black Soil', 'Cinder Soil', 'Laterite Soil', 'Peat Soil', 'Yellow Soil']
 
 def read_file_as_image(data) -> np.ndarray:
     image = np.array(Image.open(BytesIO(data)))
     return image
     
+@app.route('/predict_sentiment', methods=['POST'])
+async def predict_sentiment():
+    try:
+        data = request.json
+        text = data['text']
+        
+        output = query({
+            "inputs": text,
+        })
+        
+        return jsonify({"sentiment": output}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
 
 @app.route('/')
 def home():
@@ -107,7 +131,7 @@ def get():
         ]
         print(user_input)
         result = model.predict([[user_input[0],user_input[1],user_input[2],user_input[3],0,0,user_input[4]]])
-        # return jsonify({'message': result.tolist()})
+        return jsonify({'message': result.tolist()})
         return jsonify({
             "success": True,
             "price": result.tolist()[0]
@@ -115,7 +139,7 @@ def get():
     except Exception as e:
         return jsonify({'error': str(e)})
     
-    
+import random
 @app.route('/predictleaf', methods=['POST'])
 def predict():
     try:
@@ -133,6 +157,35 @@ def predict():
         })
     except Exception as e:
         return jsonify({'error': str(e)})
+    
+def predict(model, img):
+    img_array = img.astype(np.float32) / 255.0  
+    img_array = np.expand_dims(img_array, axis=0)  
 
+    predictions = model.predict(img_array)
+
+    predicted_class_index = np.argmax(predictions)
+    confidence = round(100 * np.max(predictions), 2)
+    return predicted_class_index, confidence
+
+@app.route('/predict_soil', methods=['POST'])
+def predict_soil():
+    try:
+        file = request.files['file']
+        image = cv2.imdecode(np.frombuffer(file.read(), np.uint8), cv2.IMREAD_COLOR)
+
+        resized_image = cv2.resize(image, (256, 256))
+        
+        predictions, confidence = predict(MODEL_SOIL, resized_image)
+        print(predictions, confidence)
+        
+        predicted_class = SOIL_NAMES[predictions]
+        
+        return jsonify({
+            'class': predicted_class,
+            'confidence': confidence
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)})
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
