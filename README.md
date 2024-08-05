@@ -82,7 +82,7 @@ Indian farmers face daily price uncertainties in crop sales in Government admini
 
 ## Authors
 
-- Aakash Rawat
-- Shivansh Chaturvedi
-- Ayaan Rajak
-- Amritesh Kumar
+- [rjk51](https://www.github.com/rjk51)
+- [Shivansh722](https://www.github.com/Shivansh722)
+- [AMRITESH240304](https://www.github.com/AMRITESH240304)
+- [AakashRawat04](https://www.github.com/AakashRawat04)
